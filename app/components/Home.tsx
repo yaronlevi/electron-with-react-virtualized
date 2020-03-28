@@ -1,13 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import routes from '../constants/routes.json';
-import styles from './Home.css';
+import { Column, Table } from 'react-virtualized';
+import 'react-virtualized/styles.css';
+
+const list = [
+  { name: 'brian', description: 'dog' },
+  { name: 'garfield', description: 'cat' }
+];
 
 export default function Home() {
   return (
-    <div className={styles.container} data-tid="container">
-      <h2>Home</h2>
-      <Link to={routes.COUNTER}>to Counter</Link>
+    <div>
+      <Table
+        width={500}
+        height={500}
+        headerHeight={50}
+        rowHeight={50}
+        rowCount={list.length}
+        rowGetter={({ index }) => list[index]}>
+        <Column label="Name" dataKey="name" width={200} />
+        <Column width={200} label="Description" dataKey="description" />
+      </Table>
     </div>
   );
 }
